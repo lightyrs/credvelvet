@@ -3,6 +3,8 @@ ruby '2.2.2'
 
 gem 'rails', '4.2.3'
 gem 'pg'
+gem 'logstash-event'
+gem 'lograge'
 gem 'simple_form'
 gem 'sidekiq'
 gem 'sinatra', require: nil
@@ -12,6 +14,8 @@ gem 'dotenv-rails'
 gem 'colored'
 gem 'omniauth'
 gem 'omniauth-twitter'
+gem 'omniauth-foursquare'
+gem 'omniauth-instagram'
 gem 'omniauth-github'
 gem 'active_model_serializers', git: 'https://github.com/rails-api/active_model_serializers.git'
 
@@ -27,6 +31,7 @@ group :development, :test do
   gem 'faker'
   gem 'puma'
   gem 'pry-rails'
+  gem 'pry-byebug'
   gem 'pry-rescue'
   gem 'pry-state'
   gem 'rspec-rails'
@@ -37,6 +42,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'meta_request'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'airbrussh', '~> 0.6.0', require: false
