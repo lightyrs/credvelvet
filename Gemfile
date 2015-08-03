@@ -5,6 +5,7 @@ gem 'rails', '4.2.3'
 gem 'pg'
 gem 'logstash-event'
 gem 'lograge'
+gem 'pundit'
 gem 'simple_form'
 gem 'sidekiq'
 gem 'sinatra', require: nil
