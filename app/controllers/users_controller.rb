@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
+
   before_action :authenticate_user!
-  before_action :correct_user?, :except => [:index]
+  before_action :correct_user?, except: [:index]
 
   def index
     @users = User.all
@@ -30,5 +31,4 @@ class UsersController < ApplicationController
   def secure_params
     params.require(:user).permit(:email)
   end
-
 end

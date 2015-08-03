@@ -7,17 +7,16 @@ class ApplicationController < ActionController::Base
   helper_method :user_signed_in?
   helper_method :correct_user?
 
-  def append_info_to_payload(payload)
-    super
-    payload[:remote_ip] = request.remote_ip
-    payload[:user_id] = if current_user.present?
-      current_user.try(:id)
-    else
-      :guest
-    end
-  end
+  include Pundit
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   private
+
+  def user_not_authorized
+    flash[:alert] = "Access denied."
+    redirect_to (request.referrer || root_path)
+  end
 
   def current_user
     begin

@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
+
   enum role: [:user, :vip, :admin]
-  after_initialize :set_default_role, :if => :new_record?
+
+  after_initialize :set_default_role, if: :new_record?
+
+  has_many :identities, dependent: :destroy
 
   def set_default_role
     if User.count == 0
@@ -10,14 +14,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.create_with_omniauth(auth)
-    create! do |user|
-      user.provider = auth['provider']
-      user.uid = auth['uid']
-      if auth['info']
-         user.name = auth['info']['name'] || ""
-      end
-    end
+  def email
+    identities.order("logged_in_at DESC").limit(1).take.try(:email)
   end
-
 end

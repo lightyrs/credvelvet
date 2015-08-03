@@ -55,4 +55,22 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Enable the logstasher logs for the current environment
+  config.logstasher.enabled = true
+
+  # This line is optional if you do not want to suppress app logs in your <environment>.log
+  config.logstasher.suppress_app_log = false
+
+  # This line is optional, it allows you to set a custom value for the @source field of the log event
+  config.logstasher.source = 'rails.credvelvet'
+
+  # This line is optional if you do not want to log the backtrace of exceptions
+  config.logstasher.backtrace = false
+
+  # This line is optional, defaults to log/logstasher_<environment>.log
+  config.logstasher.logger_path = 'log/logstasher_development.log'
+
+  # Enable logging of controller params
+  config.logstasher.log_controller_parameters = true
 end

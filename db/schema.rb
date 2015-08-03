@@ -11,10 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150802231629) do
+ActiveRecord::Schema.define(version: 20150803010454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "identities", force: :cascade do |t|
+    t.string   "uid"
+    t.string   "bio"
+    t.string   "username"
+    t.string   "provider"
+    t.string   "token"
+    t.string   "email"
+    t.string   "avatar"
+    t.string   "profile_url"
+    t.string   "location"
+    t.integer  "user_id"
+    t.integer  "login_count",  default: 0
+    t.datetime "logged_in_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "identities", ["uid", "provider"], name: "index_identities_on_uid_and_provider", unique: true, using: :btree
+  add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
