@@ -1,1 +1,1 @@
-web: bundle exec unicorn -p $PORT
+web: bundle exec rails s Puma -p $PORT
